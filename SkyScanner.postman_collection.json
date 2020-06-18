@@ -1,0 +1,2210 @@
+{
+	"info": {
+		"_postman_id": "3e3b4e21-bab6-48b5-b067-74a52b9154a5",
+		"name": "SkyScanner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List places",
+			"item": [
+				{
+					"name": "Smoke tests",
+					"item": [
+						{
+							"name": "List_places_status_code_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1aa95fbe-2dbd-4710-8f14-88b21061a943",
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.environment.unset(\"query\");\r",
+											"pm.environment.unset(\"pathParams\");\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a37e19d5-c3fc-45c2-aa0d-772f0f965ad2",
+										"exec": [
+											"const query = \"query=Sarajevo\";\r",
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"\r",
+											"pm.environment.set(\"query\", query);\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/{{pathParams}}/?{{query}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"autosuggest",
+										"v1.0",
+										"{{pathParams}}",
+										""
+									],
+									"query": [
+										{
+											"key": "{{query}}",
+											"value": ""
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List_places_schema_validation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0401bee8-0dbe-48b6-8b8e-84c7fff667a8",
+										"exec": [
+											"const schema = {\r",
+											"  \"type\" : \"object\",\r",
+											"  \"Properties\": {\r",
+											"    \"Places\": {\"type\" : \"array\",\r",
+											"    \"minItems\" : 1,\r",
+											"    \"items\" : [{\"type\" : \"string\",\r",
+											"    \"Properties\": {\r",
+											"      \"PlaceId\" : {\"type\" : \"string\"},\r",
+											"      \"PlaceName\" : {\"type\" : \"string\"},\r",
+											"      \"CountryId\" : {\"type\" : \"string\"},\r",
+											"      \"RegionId\" : {\"type\" : \"string\"},\r",
+											"      \"CityId\" : {\"type\" : \"string\"},\r",
+											"      \"CountryName\" : {\"type\" : \"string\"},\r",
+											"    },\r",
+											"    \"required\" : [\"PlaceId\", \"PlaceName\", \"CountryId\", \"RegionId\", \"CityId\", \"CountryName\"]\r",
+											"    \r",
+											"    }]\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\" : [\"Places\"]\r",
+											"};\r",
+											"\r",
+											"pm.test('Schema is valid', function() {\r",
+											" pm.response.to.have.jsonSchema(schema)\r",
+											"});\r",
+											"\r",
+											"pm.environment.unset(\"query\");\r",
+											"pm.environment.unset(\"pathParams\");\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "59911490-f6c7-4d82-a06c-4e49b1af05f9",
+										"exec": [
+											"const query = \"query=Sarajevo\";\r",
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"\r",
+											"pm.environment.set(\"query\", query);\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/{{pathParams}}/?{{query}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"autosuggest",
+										"v1.0",
+										"{{pathParams}}",
+										""
+									],
+									"query": [
+										{
+											"key": "{{query}}",
+											"value": ""
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Positive tests",
+					"item": [
+						{
+							"name": "City_Sarajevo_positive",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2759da9e-9e16-4ea8-ae0e-c9f263f75887",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"County should be Bosnia\", function () {\r",
+											"    pm.expect(response.Places[0].CountryName).to.eql(\"Bosnia and Herzegovina\");\r",
+											"});\r",
+											"pm.environment.clear();\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "4617fc4c-8520-4651-8278-e4967c0d085d",
+										"exec": [
+											"const query = \"query=Sarajevo\";\r",
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"\r",
+											"pm.environment.set(\"query\", query);\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/{{pathParams}}/?{{query}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"autosuggest",
+										"v1.0",
+										"{{pathParams}}",
+										""
+									],
+									"query": [
+										{
+											"key": "{{query}}",
+											"value": ""
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Airport_Sarajevo_positive",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c0c8bf70-e33b-4b55-a89e-21a975cb8617",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"const airport = response.Places[0];\r",
+											"\r",
+											"pm.test(\"Airport should be Sarajevo International\", function (){\r",
+											"    pm.expect(airport.PlaceName).to.eql(\"Sarajevo International\")\r",
+											"});\r",
+											"\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "bb179bbb-b11d-49e0-a5e6-df91109c10de",
+										"exec": [
+											"const query = \"query=Sarajevo\";\r",
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"\r",
+											"pm.environment.set(\"query\", query);\r",
+											"pm.environment.set(\"pathParams\", pathParams);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/{{pathParams}}/?{{query}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"autosuggest",
+										"v1.0",
+										"{{pathParams}}",
+										""
+									],
+									"query": [
+										{
+											"key": "{{query}}",
+											"value": ""
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Negative tests",
+					"item": [
+						{
+							"name": "City_Sa rajevo_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "abe4fb41-6aed-4977-884c-9e3480a3c925",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Places should be empty\", function () {\r",
+											"    pm.expect(response.Places).to.be.empty;\r",
+											"});\r",
+											"\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "565f26a1-f860-4f03-a7d3-f74c51472e0b",
+										"exec": [
+											"const query = \"query=Sa rajevo\";\r",
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"\r",
+											"pm.environment.set(\"query\", query);\r",
+											"pm.environment.set(\"pathParams\", pathParams);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/{{pathParams}}/?{{query}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"autosuggest",
+										"v1.0",
+										"{{pathParams}}",
+										""
+									],
+									"query": [
+										{
+											"key": "{{query}}",
+											"value": ""
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "City_Saraj3vo_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1a1d869a-dde5-4ae2-99e4-968fbf722205",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Places should be empty\", function () {\r",
+											"    pm.expect(response.Places).to.be.empty;\r",
+											"});\r",
+											"\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3bf09ab9-3028-4267-a70f-d400a5f95942",
+										"exec": [
+											"const query = \"query=Saraj3vo\";\r",
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"\r",
+											"pm.environment.set(\"query\", query);\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/{{pathParams}}/?{{query}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"autosuggest",
+										"v1.0",
+										"{{pathParams}}",
+										""
+									],
+									"query": [
+										{
+											"key": "{{query}}",
+											"value": ""
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "City_Sarajevo3_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "11fee4fb-2b97-48f1-97d2-77f32a49ac75",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Places should be empty\", function () {\r",
+											"    pm.expect(response.Places).to.be.empty;\r",
+											"});\r",
+											"\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7e4ade31-0cde-4233-b424-f6b6e31f1361",
+										"exec": [
+											"const query = \"query=Sarajevo3\";\r",
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"\r",
+											"pm.environment.set(\"query\", query);\r",
+											"pm.environment.set(\"pathParams\", pathParams);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/{{pathParams}}/?{{query}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"autosuggest",
+										"v1.0",
+										"{{pathParams}}",
+										""
+									],
+									"query": [
+										{
+											"key": "{{query}}",
+											"value": ""
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Browse quotes",
+			"item": [
+				{
+					"name": "Smoke tests",
+					"item": [
+						{
+							"name": "Browse_quotes_status_code_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4fd73e3c-9cbe-4569-8a8c-d1d315a6f522",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "354c9793-1103-4aa5-9afa-0744b6748db7",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsequotes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Browse_quotes_schema_validation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "72049213-533f-4339-b342-b68f32782cb5",
+										"exec": [
+											"const schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"Properties\": {\r",
+											"    \"Quotes\": {\"type\": \"array\"},\r",
+											"    \"Places\": {\"type\": \"array\"},\r",
+											"    \"Carriers\": {\"type\": \"array\"},\r",
+											"    \"Currencies\": {\"type\": \"array\",\r",
+											"                    \"minItems\": 1,\r",
+											"                    \"items\": [{\r",
+											"                      \"Code\" : {\"type\": \"string\"},\r",
+											"                      \"Symbol\" : {\"type\": \"string\"},\r",
+											"                      \"ThousandsSeparator\": {\"type\": \"string\"},\r",
+											"                      \"DecimalSeparator\": {\"type\": \"string\"},\r",
+											"                      \"SymbolOnLeft\": {\"type\": \"boolean\"},\r",
+											"                      \"SpaceBetweenAmountAndSymbol\": {\"type\": \"boolean\"},\r",
+											"                      \"RoundingCoefficient\": {\"type\": \"number\"},\r",
+											"                      \"DecimalDigits\": {\"type\": \"number\"}\r",
+											"                    }],\r",
+											"                    \"required\": [\"Code\", \"Symbol\", \"ThousandsSeparator\", \"DecimalSeparator\", \"SymbolOnLeft\", \"SpaceBetweenAmountAndSymbol\", \"RoundingCoefficient\", \"DecimalDigits\"]\r",
+											"                    }\r",
+											"  },\r",
+											"  \"required\" : [\"Quotes\", \"Places\", \"Carriers\", \"Currencies\"],\r",
+											"};\r",
+											"\r",
+											"pm.test('Schema is valid', function() {\r",
+											" pm.response.to.have.jsonSchema(schema)\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "b01130fe-d601-489e-9d07-a79248646dcc",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"TZL-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsequotes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Positive tests",
+					"item": [
+						{
+							"name": "Valid_destinations_positive",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5f646ec6-1a29-4161-b176-2d27194e4852",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Relation should be Sarajevo-Istanbul\", function () {\r",
+											"    pm.expect(response.Places[0].CityName).to.eql(\"Istanbul\");\r",
+											"    pm.expect(response.Places[2].CityName).to.eql(\"Sarajevo\");\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "9c5bca2e-08b1-4140-906c-1f157bc134e4",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsequotes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Valid_county_name_positive",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "826fb145-e5f0-4929-86de-fd08606bd44b",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Country should be Turkey\", function () {\r",
+											"    pm.expect(response.Places[0].CountryName).to.eql(\"Turkey\");\r",
+											"   \r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "131a69fd-8798-4bb6-a3be-9d8323ce0db9",
+										"exec": [
+											"const query = \"query=Sarajevo\";\r",
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"query\", query);\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsequotes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Negative tests",
+					"item": [
+						{
+							"name": "Date_in_the_past_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "09ce989e-66d1-4f3b-afd6-d51d8f192af7",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Date should be in the past\", function () {\r",
+											"    pm.expect(response.ValidationErrors[0].Message).to.eql(\"Date in the past\");\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a890bc93-22d8-422d-a432-64707a265966",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-01-01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsequotes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incorrect_date_format_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a479be6d-2ea7-407d-95ca-dfc40074c280",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Date format should be invalid\", function () {\r",
+											"    pm.expect(response.ValidationErrors[0].Message).to.eql(\"Incorrect date format\");\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "c3761029-df7e-4839-ab51-d747ff9c56f2",
+										"exec": [
+											"const query = \"query=Sarajevo\";\r",
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"query\", query);\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020.07.01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsequotes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incorrect_destination_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4d3ed1a9-b619-498c-b72f-1d31ff30f3d7",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Value should be invalid\", function () {\r",
+											"    pm.expect(response.ValidationErrors[0].Message).to.eql(\"Incorrect value\");\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "354a075f-e58f-47f2-81fd-2d3af076f2bc",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky3\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsequotes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Browse routes",
+			"item": [
+				{
+					"name": "Smoke tests",
+					"item": [
+						{
+							"name": "Browse_routes_status_code_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "53570a3e-c161-4148-b344-ae4245bbcb03",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "f15a74aa-f6a9-4819-8de2-0f72a8c5c8b3",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsequotes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Browse_routes_schema_validation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "97af15ad-4fe2-466b-8319-97ae4fe4159e",
+										"exec": [
+											"const schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"Properties\": {\r",
+											"    \"Routes\": {\"type\": \"array\"},\r",
+											"    \"Quotes\": {\"type\": \"array\"},\r",
+											"    \"Places\": {\"type\": \"array\"},\r",
+											"    \"Carriers\": {\"type\": \"array\"},\r",
+											"    \"Currencies\": {\"type\": \"array\",\r",
+											"                    \"minItems\": 1,\r",
+											"                    \"items\": [{\r",
+											"                      \"Code\" : {\"type\": \"string\"},\r",
+											"                      \"Symbol\" : {\"type\": \"string\"},\r",
+											"                      \"ThousandsSeparator\": {\"type\": \"string\"},\r",
+											"                      \"DecimalSeparator\": {\"type\": \"string\"},\r",
+											"                      \"SymbolOnLeft\": {\"type\": \"boolean\"},\r",
+											"                      \"SpaceBetweenAmountAndSymbol\": {\"type\": \"boolean\"},\r",
+											"                      \"RoundingCoefficient\": {\"type\": \"number\"},\r",
+											"                      \"DecimalDigits\": {\"type\": \"number\"}\r",
+											"                    }],\r",
+											"                    \"required\": [\"Code\", \"Symbol\", \"ThousandsSeparator\", \"DecimalSeparator\", \"SymbolOnLeft\", \"SpaceBetweenAmountAndSymbol\", \"RoundingCoefficient\", \"DecimalDigits\"]\r",
+											"                    }\r",
+											"  },\r",
+											"  \"required\" : [\"Routes\", \"Quotes\", \"Places\", \"Carriers\", \"Currencies\"],\r",
+											"};\r",
+											"\r",
+											"pm.test('Schema is valid', function() {\r",
+											" pm.response.to.have.jsonSchema(schema)\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d9e0f798-eddb-4ac0-b3bb-43bd50874c5c",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"TZL-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browseroutes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Positive tests",
+					"item": [
+						{
+							"name": "Valid_destinations_positive",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7147669e-54d2-4559-9c91-6ccba1291c5a",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Relation should be Istanbul-Sarajevo\", function () {\r",
+											"    pm.expect(response.Places[0].CityName).to.eql(\"Istanbul\");\r",
+											"    pm.expect(response.Places[2].CityName).to.eql(\"Sarajevo\");\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "19fe9149-5a4e-4c09-9f49-99b0912177cb",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browseroutes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Valid_country_name_positive",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "955e6dc4-454a-47c6-a018-e2e3be92e4bd",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Country should be Turkey\", function () {\r",
+											"    pm.expect(response.Places[0].CountryName).to.eql(\"Turkey\");\r",
+											"   \r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "42f31a28-e04c-4d06-802d-8e129054e981",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browseroutes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Negative tests",
+					"item": [
+						{
+							"name": "Date_in_the_past_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1ecbf119-4086-4a5a-98de-7f38b59021fc",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Date should be in the past\", function () {\r",
+											"    pm.expect(response.ValidationErrors[0].Message).to.eql(\"Date in the past\");\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "51e00f52-a5eb-48e3-907b-517c7fb97e39",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-01-01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browseroutes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incorrect_date_format_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "bede6cbe-9283-419f-86dd-41771fad3876",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Date format should be invalid\", function () {\r",
+											"    pm.expect(response.ValidationErrors[0].Message).to.eql(\"Incorrect date format\");\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "0d8a35d8-89bb-4a0a-8355-aeb9ecccf6db",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020.01.01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browseroutes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incorrect_destination_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4780104c-6bee-40ff-a264-59ccf0e22f89",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Value should be invalid\", function () {\r",
+											"    pm.expect(response.ValidationErrors[0].Message).to.eql(\"Incorrect value\");\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "2557859d-3796-4aa9-bbf1-76c9bb8183f9",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky3\");\r",
+											"pm.environment.set(\"date\", \"2020-01-01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browseroutes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incorrect_country_value_negative",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8e9e5c18-b01c-479d-b90e-d49bf33bf595",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Country name should be invalid\", function () {\r",
+											"    pm.expect(response.ValidationErrors[0].Message).to.eql(\"The country specific is not a valid market\");\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d0d54b44-2cd7-41f9-b934-86feb9cef90c",
+										"exec": [
+											"const pathParams = \"BAS/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-01-01\");\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?rapidapi-key={{rapidapi-key}}&{{returnDate}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browseroutes",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										},
+										{
+											"key": "{{returnDate}}",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Browse dates",
+			"item": [
+				{
+					"name": "Smoke tests",
+					"item": [
+						{
+							"name": "Browse_dates_status_code_200",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "696217b1-0d08-4996-bd65-0176ad561304",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "ec67e926-dcc9-4fd1-bbbb-d3500495908d",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?{{returnDate}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsedates",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Browse_dates_schema_validation",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "bdc2e23b-9556-4b80-aca2-04db1fb93d6f",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"TZL-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "ecfed08f-d5eb-4924-bd78-93fe7a0d5cf8",
+										"exec": [
+											"const schema = {\r",
+											"  \"type\" : \"object\",\r",
+											"  \"Properties\": {\r",
+											"    \"Dates\" : {\r",
+											"      \"type\": \"object\",\r",
+											"      \"Properties\": {\r",
+											"        \"OutboundDates\": {\"type\": \"array\" }\r",
+											"      },\r",
+											"      \"required\": [\"OutboundDates\"]\r",
+											"\r",
+											"    },\r",
+											"    \"Quotes\": {\"type\": \"array\"},\r",
+											"    \"Places\": {\"type\": \"array\"},\r",
+											"    \"Carriers\": {\"type\": \"array\"},\r",
+											"    \"Currencies\": {\"type\": \"array\",\r",
+											"    \"Properties\": {\r",
+											"      \"Code\": {\"type\": \"string\"},\r",
+											"      \"Symbol\": {\"type\": \"string\"},\r",
+											"      \"ThousandsSeparator\": {\"type\": \"string\"},\r",
+											"      \"DecimalSeparator\": {\"type\": \"string\"},\r",
+											"      \"SymbolOnLeft\": {\"type\": \"boolean\"},\r",
+											"      \"SpaceBetweenAmountAndSymbol\": {\"type\": \"boolean\"},\r",
+											"      \"RoundingCoefficient\": {\"type\": \"number\"},\r",
+											"      \"DecimalDigits\": {\"type\": \"number\"}\r",
+											"    },\r",
+											"    \"required\": [\"Code\", \"Symbol\", \"ThousandsSeparator\", \"DecimalSeparator\", \"SymbolOnLeft\", \"SpaceBetweenAmountAndSymbol\", \"RoundingCoefficient\", \"DecimalDigits\"]\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\"Dates\", \"Quotes\", \"Carriers\", \"Currencies\"]\r",
+											"};\r",
+											"\r",
+											"pm.test('Schema is valid', function() {\r",
+											" pm.response.to.have.jsonSchema(schema)\r",
+											"});\r",
+											"\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?{{returnDate}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsedates",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "{{returnDate}}",
+											"value": ""
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Positive tests",
+					"item": [
+						{
+							"name": "Valid_date_positive",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "62a98ad8-8859-4ac7-91c1-c3e9fbf06c58",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "905b4035-042e-48f6-b096-21b400bd3df1",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"\r",
+											"pm.test(\"Outbound date should be 2020-07-01\", function () {\r",
+											"   pm.expect(response.Dates.OutboundDates[0].PartialDate).to.eql(\"2020-07-01\");\r",
+											"});\r",
+											"\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?{{returnDate}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsedates",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "{{returnDate}}",
+											"value": null
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Correct_destinations_positive",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "b8a990de-4365-4440-aace-8205f5e1b8f9",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "7fa18f54-2a83-4cef-83ab-e78cec3b1021",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"console.log(response.Places[0].CountryName);\r",
+											"\r",
+											"\r",
+											"pm.test(\"Countries names should be Turkey and Bosnia and Herzegovina\", function () {\r",
+											"   pm.expect(response.Places[0].CountryName).to.eql(\"Turkey\");\r",
+											"   pm.expect(response.Places[1].CountryName).to.eql(\"Bosnia and Herzegovina\");\r",
+											"});\r",
+											"\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?{{returnDate}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsedates",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "{{returnDate}}",
+											"value": null
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Negative tests",
+					"item": [
+						{
+							"name": "Invalid_date_negative",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "56610d8e-9847-447a-9a46-6adb2cd02ace",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"ISTA-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-01-01\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "028c7c8e-9b4d-4644-90da-e583c0d37daa",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"\r",
+											"pm.test(\"Date should be in the past\", function () {\r",
+											"   pm.expect(response.ValidationErrors[0].Message).to.eql(\"Date in the past\");\r",
+											"});\r",
+											"\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?{{returnDate}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsedates",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "{{returnDate}}",
+											"value": null
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Same_origin_destination_negative",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "f14abec7-e6f7-4cf8-99f7-e78d835ef7fa",
+										"exec": [
+											"const pathParams = \"BA/BAM/bs-BA\"\r",
+											"const returnDate = \"inboundpartialdate=2020-07-02\"\r",
+											"\r",
+											"pm.environment.set(\"pathParams\", pathParams);\r",
+											"pm.environment.set(\"returnDate\", returnDate);\r",
+											"pm.environment.set(\"originPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"destinationPlace\", \"SJJ-sky\");\r",
+											"pm.environment.set(\"date\", \"2020-07-01\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "07aa97d0-8a96-44d6-a646-943c52aa4b18",
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"\r",
+											"pm.test(\"Origin place and destination place must be different\", function () {\r",
+											"   pm.expect(response.ValidationErrors[0].Message).to.eql(\"Origin place and destination place must be different\");\r",
+											"});\r",
+											"\r",
+											"pm.environment.clear();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/{{pathParams}}/{{originPlace}}/{{destinationPlace}}/{{date}}?{{returnDate}}&rapidapi-key={{rapidapi-key}}",
+									"protocol": "https",
+									"host": [
+										"skyscanner-skyscanner-flight-search-v1",
+										"p",
+										"rapidapi",
+										"com"
+									],
+									"path": [
+										"apiservices",
+										"browsedates",
+										"v1.0",
+										"{{pathParams}}",
+										"{{originPlace}}",
+										"{{destinationPlace}}",
+										"{{date}}"
+									],
+									"query": [
+										{
+											"key": "{{returnDate}}",
+											"value": null
+										},
+										{
+											"key": "rapidapi-key",
+											"value": "{{rapidapi-key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
