@@ -8,4 +8,5 @@ Available files:
  - readme.md
  
  HOW TO RUN AUTOMATED TESTS?
+ 
  Download file SkyScanner.postman_collection.json, import it in Posstman and run COLLECTION RUNNER.
